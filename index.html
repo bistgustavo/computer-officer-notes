@@ -1,39 +1,257 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Computer Officer Notes</title>
+<title>Computer Officer Study Hub</title>
 <style>
-:root{--bg:#f5f6f8;--card:#fff;--ink:#1b1f24;--muted:#5b6470;--line:#e1e5ea;--accent:#1f4e8c}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101317;--card:#191e24;--ink:#e6e9ed;--muted:#9aa4b0;--line:#2a3139;--accent:#86b4ff}}
-:root[data-theme="dark"]{--bg:#101317;--card:#191e24;--ink:#e6e9ed;--muted:#9aa4b0;--line:#2a3139;--accent:#86b4ff}
+:root{--bg:#f5f6f8;--card:#fff;--ink:#1b1f24;--muted:#5b6470;--line:#e1e5ea;--accent:#1f4e8c;--accent-ink:#fff;--soft:#e8f0fb;
+--ok:#1d6b3a;--ok-soft:#e6f4ec;--co:#8a3b00;--co-soft:#fff1e3;--supp:#6b2a8c;--supp-soft:#f4ebfa}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101317;--card:#191e24;--ink:#e6e9ed;--muted:#9aa4b0;--line:#2a3139;--accent:#86b4ff;--accent-ink:#0c1420;--soft:#1d2838;
+--ok:#73d39c;--ok-soft:#16281e;--co:#ffb36b;--co-soft:#2b2015;--supp:#d4a5f0;--supp-soft:#251d2c}}
+:root[data-theme="dark"]{--bg:#101317;--card:#191e24;--ink:#e6e9ed;--muted:#9aa4b0;--line:#2a3139;--accent:#86b4ff;--accent-ink:#0c1420;--soft:#1d2838;
+--ok:#73d39c;--ok-soft:#16281e;--co:#ffb36b;--co-soft:#2b2015;--supp:#d4a5f0;--supp-soft:#251d2c}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Noto Sans",system-ui,sans-serif;line-height:1.45}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Noto Sans",system-ui,-apple-system,sans-serif;line-height:1.45}
 .wrap{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
-h1{margin:0;font-size:1.7rem;color:var(--accent)} h2{font-size:1.15rem;color:var(--accent);margin:0 0 6px}
-.sub{color:var(--muted);margin:4px 0 16px} a{color:var(--accent)}
+h1{margin:0;font-size:1.7rem;color:var(--accent)}
+.sub{color:var(--muted);margin:4px 0 16px}
+a{color:var(--accent)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px}
-.scroll{overflow-x:auto} table{border-collapse:collapse;width:100%;font-size:.92rem}
-th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top} th{color:var(--muted);font-size:.82rem}
+.card>h2{margin:0 0 2px;font-size:1.2rem;color:var(--accent)}
+.card>.lead{margin:0 0 10px;color:var(--muted);font-size:.92rem}
+.bar-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+nav.jump a{margin-right:14px;text-decoration:none;font-weight:600}
+.prog{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:5px;overflow:hidden} .bar i{display:block;height:100%;background:var(--ok)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px}
+.stat{background:var(--soft);border-radius:10px;padding:10px 12px} .stat b{display:block;font-size:1.35rem;color:var(--accent)} .stat span{font-size:.8rem;color:var(--muted)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.tools input{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:1rem}
+.tools button{padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;font:inherit}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.82rem}
+.scroll{overflow-x:auto}
+.gk{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.gk .desc{flex:1;min-width:220px;font-size:.92rem}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;padding:8px 14px;border-radius:8px;font-weight:600}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:2px 0 10px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+ol.units{list-style:none;margin:0;padding:0}
+.unit{border-top:1px solid var(--line);padding:12px 0}
+.unit:first-child{border-top:none}
+.uhead{display:flex;gap:12px;align-items:flex-start}
+.unum{font-weight:800;color:var(--accent);font-size:1.15rem;min-width:30px}
+.utitle h3{margin:0;font-size:1.05rem}
+.weight{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:8px;margin-top:2px}
+.wbar{width:90px;height:6px;background:var(--line);border-radius:4px;overflow:hidden;display:inline-block} .wbar i{display:block;height:100%;background:var(--accent)}
+.files{display:grid;gap:8px;margin:10px 0 4px 42px}
+.file{border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:8px;padding:8px 10px;background:var(--ok-soft)}
+.file.prac{border-left-color:var(--supp)}
+.file .open{text-decoration:none;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.file a.open:hover .fname{text-decoration:underline}
+.kind{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--ok)}
+.fname{font-weight:600;word-break:break-word}
+.fmeta{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:3px}
+.pract{margin-top:6px;font-size:.8rem;font-weight:600;color:var(--supp)}
+details{margin:6px 0 0 42px;font-size:.88rem} summary{cursor:pointer;color:var(--muted)}
+ul.subs{margin:6px 0 0;padding-left:18px;columns:2;column-gap:24px} ul.subs li{break-inside:avoid;margin:2px 0}
+.asked{margin:8px 0 0;padding:8px 10px;border-radius:8px;background:var(--co-soft)} .asked b{color:var(--co)} .asked ul{margin:4px 0 0;padding-left:18px}
+@media (max-width:640px){.files,details{margin-left:0} ul.subs{columns:1}}
+.hide{display:none!important}
+.tips li{margin:3px 0}
+.small{font-size:.86rem;color:var(--muted)}
+footer{color:var(--muted);font-size:.8rem;text-align:center;margin-top:20px}
 </style></head><body><div class="wrap">
-<h1>Lok Sewa Computer Officer: Notes</h1>
-<p class="sub">Paper I Part II (General Technical Subject), Paper II and the practical exam. Twelve chapters, one per syllabus unit, in syllabus order: 619 pages and 904 MCQs with answer keys.</p>
-<div class="card"><h2>The 12 chapters (Paper I Part II, Unit 1–12)</h2>
-<div class="scroll"><table>
-<tr><th>Unit</th><th>Chapter (PDF)</th><th>Weight</th><th>Pages</th><th>MCQs</th><th>Asked in Paper II</th></tr>
-<tr><td>1</td><td><a href="2. Computer Notes/Unit01_Computer_Fundamentals.pdf">Computer Fundamentals</a></td><td>10%</td><td>35</td><td>54</td><td>CO 2079 Q1, 2083 Q1</td></tr>
-<tr><td>2</td><td><a href="2. Computer Notes/Unit02_Data_Structure_and_Algorithms.pdf">Data Structure and Algorithms</a></td><td>8%</td><td>35</td><td>62</td><td>CO 2079 Q2, 2083 Q2</td></tr>
-<tr><td>3</td><td><a href="2. Computer Notes/Unit03_System_Analysis_and_Design.pdf">System Analysis and Design</a></td><td>10%</td><td>56</td><td>89</td><td>CO 2079 Q4, Q5; 2083 Q4, Q5</td></tr>
-<tr><td>4</td><td><a href="2. Computer Notes/Unit04_Operating_Systems.pdf">Operating Systems</a></td><td>10% + practical</td><td>59</td><td>118</td><td>CO 2079 Q6, 2083 Q6</td></tr>
-<tr><td>5</td><td><a href="2. Computer Notes/Unit05_Database_Management_System.pdf">Database Management System and Design</a></td><td>14% + 2 practical</td><td>87</td><td>114</td><td>CO 2079 Q7, 2083 Q7</td></tr>
-<tr><td>6</td><td><a href="2. Computer Notes/Unit06_Programming_Language.pdf">Programming Language</a></td><td>8% + practical</td><td>71</td><td>83</td><td>CO 2079 Q3, Q8a; 2083 Q3</td></tr>
-<tr><td>7</td><td><a href="2. Computer Notes/Unit07_Networking.pdf">Networking</a></td><td>10% + practical</td><td>95</td><td>125</td><td>CO 2079 Q9, 2083 Q8</td></tr>
-<tr><td>8</td><td><a href="2. Computer Notes/Unit08_Computer_Architecture_and_Organization.pdf">Computer Architecture and Organization</a></td><td>4%</td><td>27</td><td>47</td><td>(see Unit 1)</td></tr>
-<tr><td>9</td><td><a href="2. Computer Notes/Unit09_Compiler_Design.pdf">Compiler Design</a></td><td>2%</td><td>31</td><td>42</td><td>CO 2079 Q8a, 2083 Q9</td></tr>
-<tr><td>10</td><td><a href="2. Computer Notes/Unit10_E-Commerce_Technology.pdf">E-Commerce Technology</a></td><td>4%</td><td>39</td><td>68</td><td>CO 2079 Q8b, 2083 Q10a</td></tr>
-<tr><td>11</td><td><a href="2. Computer Notes/Unit11_MIS_and_Web_Engineering.pdf">MIS and Web Engineering</a></td><td>10%</td><td>52</td><td>55</td><td>CO 2083 Q10</td></tr>
-<tr><td>12</td><td><a href="2. Computer Notes/Unit12_IT_in_Nepal.pdf">IT in Nepal</a></td><td>10%</td><td>32</td><td>47</td><td>CO 2079 Q10</td></tr>
-</table></div>
-<p class="sub" style="margin:10px 0 0">Each chapter has: a syllabus map, the real past questions, the full syllabus content, model answers, a quick-revision sheet, a question bank and an MCQ answer key. Units 4, 5, 6 and 7 also have a practical-exam section with tested commands, SQL and programs.</p></div>
-<div class="card"><h2>Other files</h2>
-<p style="margin:0"><a href="1. General Knowledge and Reasoning/Lok_Sewa_Paper_I_Master_Notes.pdf">Paper I Part I: General Knowledge and Reasoning (own notes)</a> · <a href="computer_officer_syllabus.pdf">Syllabus (PDF)</a> · <a href="IT_SYLLABUS.md">Syllabus item list</a></p></div>
-<p class="sub">Exam pattern: Paper I Part II has 50 MCQs (wrong answer −0.2); Paper II has 10 subjective questions of 10 marks; the practical exam (50 marks) has OS 1, DBMS 2, programming 1 and networking 1 question.</p>
-</div></body></html>
+<h1>Computer Officer Study Hub</h1>
+<p class="sub">Lok Sewa Aayog · Computer Officer (कम्प्युटर अधिकृत), Gazetted Third Class, Nepal Miscellaneous Service. Every PDF opens in a new tab; all links are inside this folder.</p>
+
+<div class="card"><div class="bar-row">
+<nav class="jump"><a href="#scheme">Exam scheme</a><a href="#gk">Part I: GK &amp; Reasoning</a><a href="#it">Part II: Computer</a><a href="#papers">Past questions</a><a href="#syllabus">Syllabus</a></nav>
+<div class="prog"><div class="bar"><i style="width:100%"></i></div><span><b>12</b> of 12 chapters ready · 619 pages · 904 practice MCQs</span></div></div>
+<div class="stats"><div class="stat"><b>12</b><span>chapters, one per syllabus unit</span></div><div class="stat"><b>619</b><span>A4 pages (about 310 sheets double-sided)</span></div>
+<div class="stat"><b>202</b><span>model answers</span></div><div class="stat"><b>904</b><span>MCQs with answer keys</span></div><div class="stat"><b>4</b><span>practical-exam sections (OS, DBMS, programming, networking)</span></div></div></div>
+
+<section class="card" id="scheme"><h2>Exam scheme</h2><p class="lead">Each wrong MCQ answer costs 20% of its mark; a blank costs nothing. No calculator.</p>
+<div class="scroll"><table><thead><tr><th>Stage</th><th>Paper</th><th>Marks</th><th>Pass</th><th>Format</th><th>Time</th></tr></thead><tbody>
+<tr><td>Written</td><td>Paper I: General Subject</td><td>100</td><td>40</td><td>Part I GK &amp; reasoning: 50 MCQ × 1 · Part II computer: 50 MCQ × 1</td><td>1 h 30 min</td></tr>
+<tr><td>Written</td><td>Paper II: Technical Subject</td><td>100</td><td>40</td><td>Subjective, 10 questions × 10</td><td>3 h</td></tr>
+<tr><td>2nd stage</td><td>Practical</td><td>50</td><td>25</td><td>5 × 10: OS 1, DBMS 2, programming 1, networking 1</td><td>1 h 30 min</td></tr>
+<tr><td>2nd stage</td><td>Group test</td><td>10</td><td>–</td><td>Group discussion</td><td>30 min</td></tr>
+<tr><td>2nd stage</td><td>Interview</td><td>30</td><td>–</td><td>Board interview</td><td>–</td></tr>
+</tbody></table></div></section>
+
+<section class="card" id="gk"><h2>Part I: General Knowledge and Reasoning</h2><p class="lead">Paper I, Part I · 50 MCQs (25 general awareness + 25 general reasoning)</p>
+<div class="gk"><div class="desc"><b>Lok Sewa Paper I Master Notes</b><br><span class="small">Geography, history, Constitution, governance, Civil Service Act, plans, current affairs; verbal, numerical and spatial reasoning with shortcuts; a full 50-MCQ model test with key. 112 pages · 2.7 MB.</span></div>
+<a class="btn" href="1.%20General%20Knowledge%20and%20Reasoning/Lok_Sewa_Paper_I_Master_Notes.pdf" target="_blank" rel="noopener">Open PDF</a></div></section>
+
+<section class="card" id="it"><h2>Part II: Computer notes (12 chapters)</h2>
+<p class="lead">Paper I, Part II · 50 MCQs. The same chapters serve the subjective Paper II and the practical exam. Each chapter follows its syllabus items in order and has a clickable index, figures, a syllabus map, the real past questions, model answers, a quick-revision sheet, a question bank and an MCQ answer key.</p>
+<div class="legend"><span style="--c:var(--ok)">Chapter (Computer Officer edition)</span><span style="--c:var(--supp)">Also has a practical-exam section</span><span style="--c:var(--co)">Asked in a real Paper II</span></div>
+<div class="tools"><input id="q" type="search" placeholder="Search units and topics (e.g. VPN, normalization, JAD, Unicode)…" aria-label="Search units and topics"><button id="exp" type="button">Show all topics</button><button id="theme" type="button">Toggle theme</button></div>
+<ol class="units" id="units">
+<li class="unit" data-s="computer fundamentals 1.1 computers, kinds of computers by size and function 1.2 generations of computers 1.3 components and architecture of computers, connecting the components 1.4 getting started: personal computers, system unit, starting the computer 1.5 input devices: keyboard, mouse, other input devices 1.6 processing: cpu, memory 1.7 storage devices: floppy disk drive, hard drive, usb devices, other storage 1.8 output devices: monitors, printers, modems, sound boards 1.9 dos survival guide: command prompt, creating and using autoexec.bat and config.sys 1.10 windows survival guide: desktop, program manager, organizing the desktop, file manager 1.11 using application software 1.12 windows explorer, e-mail, internet, intranet, extranet, ethernet, http 1.13 computer viruses, antivirus 2079 q1: computer architecture (block diagram); autoexec.bat and config.sys; internet vs extranet 2083 q1: cpu and its components; internet, intranet and extranet">
+  <div class="uhead"><span class="unum">01</span>
+    <div class="utitle"><h3>Computer Fundamentals</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit01_Computer_Fundamentals.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 1</span><span class="fname">Unit01_Computer_Fundamentals.pdf</span></a>
+    <div class="fmeta"><span>Items 1.1–1.13 in syllabus order</span><span>35 pages · 2.0 MB · 18 model answers · 54 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (13) and past Paper II questions</summary><ul class="subs"><li>1.1 Computers, kinds of computers by size and function</li><li>1.2 Generations of computers</li><li>1.3 Components and architecture of computers, connecting the components</li><li>1.4 Getting started: personal computers, system unit, starting the computer</li><li>1.5 Input devices: keyboard, mouse, other input devices</li><li>1.6 Processing: CPU, memory</li><li>1.7 Storage devices: floppy disk drive, hard drive, USB devices, other storage</li><li>1.8 Output devices: monitors, printers, modems, sound boards</li><li>1.9 DOS survival guide: command prompt, creating and using AUTOEXEC.BAT and CONFIG.SYS</li><li>1.10 Windows survival guide: desktop, Program Manager, organizing the desktop, File Manager</li><li>1.11 Using application software</li><li>1.12 Windows Explorer, e-mail, Internet, intranet, extranet, Ethernet, HTTP</li><li>1.13 Computer viruses, antivirus</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q1: computer architecture (block diagram); AUTOEXEC.BAT and CONFIG.SYS; Internet vs extranet</li><li>2083 Q1: CPU and its components; Internet, intranet and extranet</li></ul></div></details>
+</li>
+<li class="unit" data-s="data structure and algorithms 2.1 fundamentals of data structures, abstract data types 2.2 lists, linked lists, stacks 2.3 queues, priority queues 2.4 trees: traversal, implementations, binary trees, bst, balanced search trees, avl trees 2.5 indexing methods, hashing trees, suffix trees 2.6 worst-case and expected time complexity 2.7 analysis of simple recursive and non-recursive algorithms 2.8 searching, merging and sorting 2.9 algorithm design: divide-and-conquer, dynamic programming, greedy methods, backtracking 2.10 graph algorithms: dfs, bfs, shortest path, minimum spanning trees, dags 2079 q2: bfs vs dfs 2083 q2: tree data structure and traversals">
+  <div class="uhead"><span class="unum">02</span>
+    <div class="utitle"><h3>Data Structure and Algorithms</h3>
+      <div class="weight"><span class="wbar"><i style="width:56%"></i></span>8% · about 4 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit02_Data_Structure_and_Algorithms.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 2</span><span class="fname">Unit02_Data_Structure_and_Algorithms.pdf</span></a>
+    <div class="fmeta"><span>Items 2.1–2.10 in syllabus order</span><span>35 pages · 1.2 MB · 14 model answers · 62 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (10) and past Paper II questions</summary><ul class="subs"><li>2.1 Fundamentals of data structures, abstract data types</li><li>2.2 Lists, linked lists, stacks</li><li>2.3 Queues, priority queues</li><li>2.4 Trees: traversal, implementations, binary trees, BST, balanced search trees, AVL trees</li><li>2.5 Indexing methods, hashing trees, suffix trees</li><li>2.6 Worst-case and expected time complexity</li><li>2.7 Analysis of simple recursive and non-recursive algorithms</li><li>2.8 Searching, merging and sorting</li><li>2.9 Algorithm design: divide-and-conquer, dynamic programming, greedy methods, backtracking</li><li>2.10 Graph algorithms: DFS, BFS, shortest path, minimum spanning trees, DAGs</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q2: BFS vs DFS</li><li>2083 Q2: tree data structure and traversals</li></ul></div></details>
+</li>
+<li class="unit" data-s="system analysis and design 3.1 system, system owner, user, designers and builders, system analysts, variations on the analyst title, system life cycle 3.2 joint application development (jad): definition, purpose, philosophy, scope 3.3 people in a jad: sponsor, business users, system analyst 3.4 roles of jad group members: project leader, record keeper, time keeper 3.5 system design environment: development process, management process, system structure, components of a computer-based information system, personal/centralized/distributed systems 3.6 concept formation: finding the problem, evaluating the proposal, technical, operational and economic feasibility 3.7 requirements analysis: system analysis model, requirement model, design model 3.8 development process: design method 3.9 e-r diagram: notation, strong and weak entities, simple and composite, single- and multi-valued, null and derived attributes 3.10 relationship sets: degree and cardinality, specialization, generalization, aggregation 3.11 dfds: symbols, files or data stores, external entities, data flows 3.12 describing a system with dfds: context diagram, top-level dfd, expanded-level dfd, conversion of data 3.13 object modeling: oo concepts, object structure, object features, class and object 3.14 representation: association, composition, inheritance, multiple inheritance 3.15 modeling: use case diagram, state diagram, event flow diagram 3.16 documentation: automatic and manual systems 2079 q4: user involvement; analysis and design techniques 2079 q5: jad and the roles of its members 2083 q4: roles of jad members; sdlc and why sad matters 2083 q5: use case diagram (online shopping)">
+  <div class="uhead"><span class="unum">03</span>
+    <div class="utitle"><h3>System Analysis and Design</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit03_System_Analysis_and_Design.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 3</span><span class="fname">Unit03_System_Analysis_and_Design.pdf</span></a>
+    <div class="fmeta"><span>Items 3.1–3.16 in syllabus order</span><span>56 pages · 1.9 MB · 19 model answers · 89 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (16) and past Paper II questions</summary><ul class="subs"><li>3.1 System, system owner, user, designers and builders, system analysts, variations on the analyst title, system life cycle</li><li>3.2 Joint Application Development (JAD): definition, purpose, philosophy, scope</li><li>3.3 People in a JAD: sponsor, business users, system analyst</li><li>3.4 Roles of JAD group members: project leader, record keeper, time keeper</li><li>3.5 System design environment: development process, management process, system structure, components of a computer-based information system, personal/centralized/distributed systems</li><li>3.6 Concept formation: finding the problem, evaluating the proposal, technical, operational and economic feasibility</li><li>3.7 Requirements analysis: system analysis model, requirement model, design model</li><li>3.8 Development process: design method</li><li>3.9 E-R diagram: notation, strong and weak entities, simple and composite, single- and multi-valued, null and derived attributes</li><li>3.10 Relationship sets: degree and cardinality, specialization, generalization, aggregation</li><li>3.11 DFDs: symbols, files or data stores, external entities, data flows</li><li>3.12 Describing a system with DFDs: context diagram, top-level DFD, expanded-level DFD, conversion of data</li><li>3.13 Object modeling: OO concepts, object structure, object features, class and object</li><li>3.14 Representation: association, composition, inheritance, multiple inheritance</li><li>3.15 Modeling: use case diagram, state diagram, event flow diagram</li><li>3.16 Documentation: automatic and manual systems</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q4: user involvement; analysis and design techniques</li><li>2079 Q5: JAD and the roles of its members</li><li>2083 Q4: roles of JAD members; SDLC and why SAD matters</li><li>2083 Q5: use case diagram (online shopping)</li></ul></div></details>
+</li>
+<li class="unit" data-s="operating systems 4.1 definition, development and functions of an os 4.2 basic components of an os, information storage and management systems 4.3 disk allocation and scheduling, memory management, virtual memory, processes and process management 4.4 process scheduling, inter-process communication, deadlocks 4.5 parallel and distributed processing, security threats to an os 4.6 ms-dos overview 4.7 windows, unix and linux families of products 4.8 windows networking 4.9 windows architecture, linux architecture 4.10 troubleshooting windows and linux 4.11 managing network printing 4.12 managing hard disks and partitions 4.13 monitoring and troubleshooting windows 4.14 users, groups and permissions in linux and windows 2079 q6: page replacement algorithms 2083 q6: virtual memory, paging and segmentation, process management">
+  <div class="uhead"><span class="unum">04</span>
+    <div class="utitle"><h3>Operating Systems</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file prac"><a class="open" href="2.%20Computer%20Notes/Unit04_Operating_Systems.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 4</span><span class="fname">Unit04_Operating_Systems.pdf</span></a>
+    <div class="fmeta"><span>Items 4.1–4.14 in syllabus order</span><span>59 pages · 2.7 MB · 25 model answers · 118 MCQs</span></div><div class="pract">Practical section · OS practical: users, permissions, disks, Windows and Linux commands</div></div></div>
+  <details><summary>Syllabus topics (14) and past Paper II questions</summary><ul class="subs"><li>4.1 Definition, development and functions of an OS</li><li>4.2 Basic components of an OS, information storage and management systems</li><li>4.3 Disk allocation and scheduling, memory management, virtual memory, processes and process management</li><li>4.4 Process scheduling, inter-process communication, deadlocks</li><li>4.5 Parallel and distributed processing, security threats to an OS</li><li>4.6 MS-DOS overview</li><li>4.7 Windows, Unix and Linux families of products</li><li>4.8 Windows networking</li><li>4.9 Windows architecture, Linux architecture</li><li>4.10 Troubleshooting Windows and Linux</li><li>4.11 Managing network printing</li><li>4.12 Managing hard disks and partitions</li><li>4.13 Monitoring and troubleshooting Windows</li><li>4.14 Users, groups and permissions in Linux and Windows</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q6: page replacement algorithms</li><li>2083 Q6: virtual memory, paging and segmentation, process management</li></ul></div></details>
+</li>
+<li class="unit" data-s="database management system and design 5.1 introduction, database models, relational model, integrity, rdbms 5.2 sql and embedded sql 5.3 basic sql select statements 5.4 restricting and sorting data 5.5 single-row functions 5.6 displaying data from multiple tables (joins) 5.7 aggregating data with group functions 5.8 subqueries, manipulating data, creating and managing tables 5.9 views and controlling user access 5.10 set operators, date-time functions 5.11 database design: logical, conceptual, mapping conceptual to logical, pragmatic issues, physical design, integrity and correctness, relational algebra, relational calculus 5.12 normalization: 1nf, 2nf, 3nf, bcnf, 4nf, 5nf, dknf 5.13 dbms architecture: client-server, open architectures, transaction processing, multi-user and concurrency, backup and recovery 5.14 major rdbms products: oracle, sybase, db2, sql server and others 2079 q7: normalization to 3nf, relational algebra and sql 2083 q7: concurrency control techniques">
+  <div class="uhead"><span class="unum">05</span>
+    <div class="utitle"><h3>Database Management System and Design</h3>
+      <div class="weight"><span class="wbar"><i style="width:98%"></i></span>14% · about 7 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file prac"><a class="open" href="2.%20Computer%20Notes/Unit05_Database_Management_System.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 5</span><span class="fname">Unit05_Database_Management_System.pdf</span></a>
+    <div class="fmeta"><span>Items 5.1–5.14 in syllabus order</span><span>87 pages · 3.3 MB · 16 model answers · 114 MCQs</span></div><div class="pract">Practical section · DBMS practical (2 questions): schema, constraints and 20 checked SQL queries</div></div></div>
+  <details><summary>Syllabus topics (14) and past Paper II questions</summary><ul class="subs"><li>5.1 Introduction, database models, relational model, integrity, RDBMS</li><li>5.2 SQL and embedded SQL</li><li>5.3 Basic SQL SELECT statements</li><li>5.4 Restricting and sorting data</li><li>5.5 Single-row functions</li><li>5.6 Displaying data from multiple tables (joins)</li><li>5.7 Aggregating data with group functions</li><li>5.8 Subqueries, manipulating data, creating and managing tables</li><li>5.9 Views and controlling user access</li><li>5.10 Set operators, date-time functions</li><li>5.11 Database design: logical, conceptual, mapping conceptual to logical, pragmatic issues, physical design, integrity and correctness, relational algebra, relational calculus</li><li>5.12 Normalization: 1NF, 2NF, 3NF, BCNF, 4NF, 5NF, DKNF</li><li>5.13 DBMS architecture: client-server, open architectures, transaction processing, multi-user and concurrency, backup and recovery</li><li>5.14 Major RDBMS products: Oracle, Sybase, DB2, SQL Server and others</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q7: normalization to 3NF, relational algebra and SQL</li><li>2083 Q7: concurrency control techniques</li></ul></div></details>
+</li>
+<li class="unit" data-s="programming language 6.1 history, programming paradigms, role of language translators 6.2 fundamental issues in language design 6.3 virtual machines, code generation, loop optimization 6.4 procedural, structured and object-oriented programming 6.5 c and c++ programming 6.6 java: declaration, modularity and storage management 2079 q3: oop building blocks; c++ vs java 2079 q8a: code optimization and loop optimization 2083 q3: language translators; java access modifiers">
+  <div class="uhead"><span class="unum">06</span>
+    <div class="utitle"><h3>Programming Language</h3>
+      <div class="weight"><span class="wbar"><i style="width:56%"></i></span>8% · about 4 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file prac"><a class="open" href="2.%20Computer%20Notes/Unit06_Programming_Language.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 6</span><span class="fname">Unit06_Programming_Language.pdf</span></a>
+    <div class="fmeta"><span>Items 6.1–6.6 in syllabus order</span><span>71 pages · 2.2 MB · 14 model answers · 83 MCQs</span></div><div class="pract">Practical section · Programming practical: 7 tested C, C++ and Java programs</div></div></div>
+  <details><summary>Syllabus topics (6) and past Paper II questions</summary><ul class="subs"><li>6.1 History, programming paradigms, role of language translators</li><li>6.2 Fundamental issues in language design</li><li>6.3 Virtual machines, code generation, loop optimization</li><li>6.4 Procedural, structured and object-oriented programming</li><li>6.5 C and C++ programming</li><li>6.6 Java: declaration, modularity and storage management</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q3: OOP building blocks; C++ vs Java</li><li>2079 Q8a: code optimization and loop optimization</li><li>2083 Q3: language translators; Java access modifiers</li></ul></div></details>
+</li>
+<li class="unit" data-s="networking 7.1 basic theory: definition, network models, connectivity, addressing 7.2 connectivity: data packets, establishing a connection, reliable delivery, noise control, building codes, connection devices 7.3 advanced theory: osi model, ethernet, network resources, token ring, fddi, wireless 7.4 protocols: protocol families, netbeui, bridges and switches, tcp/ip, building a tcp/ip network, tcp/ip suite 7.5 tcp/ip services: dhcp, dns, netbios support, snmp, tcp/ip utilities, ftp 7.6 lan infrastructure: lan protocols, ip routing, routing tables, router discovery protocols, data movement in routed networks, vlans 7.7 wan infrastructure: wan environment, transmission technologies, connectivity devices, voice over data 7.8 remote networking: remote access protocols, vpn 7.9 computer security: virus, worm, trojan horse 7.10 network security: virus protection, local security, network access, internet security 7.11 disaster recovery: need, recovery plan, data backup, fault tolerance 7.12 advanced storage: enterprise storage, clustering, nas, san 7.13 network troubleshooting: systematic approach 7.14 network support tools: utilities, network baseline 7.15 network access points, common network components, common peripheral ports 2079 q9: dhcp and dns name resolution 2083 q8: dns name resolution; dhcp">
+  <div class="uhead"><span class="unum">07</span>
+    <div class="utitle"><h3>Networking</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file prac"><a class="open" href="2.%20Computer%20Notes/Unit07_Networking.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 7</span><span class="fname">Unit07_Networking.pdf</span></a>
+    <div class="fmeta"><span>Items 7.1–7.15 in syllabus order</span><span>95 pages · 3.7 MB · 28 model answers · 125 MCQs</span></div><div class="pract">Practical section · Networking practical: cabling, VLSM, IP set-up, ping/DNS, Cisco VLAN and DHCP</div></div></div>
+  <details><summary>Syllabus topics (15) and past Paper II questions</summary><ul class="subs"><li>7.1 Basic theory: definition, network models, connectivity, addressing</li><li>7.2 Connectivity: data packets, establishing a connection, reliable delivery, noise control, building codes, connection devices</li><li>7.3 Advanced theory: OSI model, Ethernet, network resources, Token Ring, FDDI, wireless</li><li>7.4 Protocols: protocol families, NetBEUI, bridges and switches, TCP/IP, building a TCP/IP network, TCP/IP suite</li><li>7.5 TCP/IP services: DHCP, DNS, NetBIOS support, SNMP, TCP/IP utilities, FTP</li><li>7.6 LAN infrastructure: LAN protocols, IP routing, routing tables, router discovery protocols, data movement in routed networks, VLANs</li><li>7.7 WAN infrastructure: WAN environment, transmission technologies, connectivity devices, voice over data</li><li>7.8 Remote networking: remote access protocols, VPN</li><li>7.9 Computer security: virus, worm, Trojan horse</li><li>7.10 Network security: virus protection, local security, network access, Internet security</li><li>7.11 Disaster recovery: need, recovery plan, data backup, fault tolerance</li><li>7.12 Advanced storage: enterprise storage, clustering, NAS, SAN</li><li>7.13 Network troubleshooting: systematic approach</li><li>7.14 Network support tools: utilities, network baseline</li><li>7.15 Network access points, common network components, common peripheral ports</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q9: DHCP and DNS name resolution</li><li>2083 Q8: DNS name resolution; DHCP</li></ul></div></details>
+</li>
+<li class="unit" data-s="computer architecture and organization 8.1 evolution of computers, design methodology, instruction set architecture, mips isa, alu design 8.2 datapath design: single- and multi-cycle, pipelining, memory hierarchy, i/o system, buses and the role of the os ">
+  <div class="uhead"><span class="unum">08</span>
+    <div class="utitle"><h3>Computer Architecture and Organization</h3>
+      <div class="weight"><span class="wbar"><i style="width:28%"></i></span>4% · about 2 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit08_Computer_Architecture_and_Organization.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 8</span><span class="fname">Unit08_Computer_Architecture_and_Organization.pdf</span></a>
+    <div class="fmeta"><span>Items 8.1–8.2 in syllabus order</span><span>27 pages · 0.9 MB · 10 model answers · 47 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (2) and past Paper II questions</summary><ul class="subs"><li>8.1 Evolution of computers, design methodology, instruction set architecture, MIPS ISA, ALU design</li><li>8.2 Datapath design: single- and multi-cycle, pipelining, memory hierarchy, I/O system, buses and the role of the OS</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>Not asked yet as a full question (see Unit 1)</li></ul></div></details>
+</li>
+<li class="unit" data-s="compiler design 9.1 introduction to compiling 9.2 lexical, syntax and semantic analysis 9.3 run-time environment 9.4 intermediate code generation, code optimization 9.5 compiler generation tools 2083 q9: phases of a compiler 2079 q8a: code optimization">
+  <div class="uhead"><span class="unum">09</span>
+    <div class="utitle"><h3>Compiler Design</h3>
+      <div class="weight"><span class="wbar"><i style="width:14%"></i></span>2% · about 1 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit09_Compiler_Design.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 9</span><span class="fname">Unit09_Compiler_Design.pdf</span></a>
+    <div class="fmeta"><span>Items 9.1–9.5 in syllabus order</span><span>31 pages · 1.0 MB · 10 model answers · 42 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (5) and past Paper II questions</summary><ul class="subs"><li>9.1 Introduction to compiling</li><li>9.2 Lexical, syntax and semantic analysis</li><li>9.3 Run-time environment</li><li>9.4 Intermediate code generation, code optimization</li><li>9.5 Compiler generation tools</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2083 Q9: phases of a compiler</li><li>2079 Q8a: code optimization</li></ul></div></details>
+</li>
+<li class="unit" data-s="e-commerce technology 10.1 introduction to e-commerce 10.2 e-commerce strategies 10.3 e-commerce security issues 10.4 success models of e-governance 10.5 e-business: b2b, b2c, b2e, c2c, g2g, g2c 10.6 electronic payment principles, strategies and systems 10.7 e-marketing, reverse engineering 10.8 e-banking, edi methods, swift 10.9 encryption and decryption, xml, layout managers, event model 2079 q8b: a successful e-governance model in nepal 2083 q10a: e-governance and its success factors">
+  <div class="uhead"><span class="unum">10</span>
+    <div class="utitle"><h3>E-Commerce Technology</h3>
+      <div class="weight"><span class="wbar"><i style="width:28%"></i></span>4% · about 2 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit10_E-Commerce_Technology.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 10</span><span class="fname">Unit10_E-Commerce_Technology.pdf</span></a>
+    <div class="fmeta"><span>Items 10.1–10.9 in syllabus order</span><span>39 pages · 1.1 MB · 17 model answers · 68 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (9) and past Paper II questions</summary><ul class="subs"><li>10.1 Introduction to e-commerce</li><li>10.2 E-commerce strategies</li><li>10.3 E-commerce security issues</li><li>10.4 Success models of e-governance</li><li>10.5 E-business: B2B, B2C, B2E, C2C, G2G, G2C</li><li>10.6 Electronic payment principles, strategies and systems</li><li>10.7 E-marketing, reverse engineering</li><li>10.8 E-banking, EDI methods, SWIFT</li><li>10.9 Encryption and decryption, XML, layout managers, event model</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q8b: a successful e-governance model in Nepal</li><li>2083 Q10a: e-governance and its success factors</li></ul></div></details>
+</li>
+<li class="unit" data-s="mis and web engineering 11.1 information systems, client-server computing 11.2 information systems and decision making 11.3 database design issues, data mining, data warehousing 11.4 knowledge management, strategic use of it 11.5 reengineering with it, erp, is security, information privacy, global it issues 11.6 software demonstrations including advanced spreadsheets, cbse 11.7 multimedia 11.8 oop with com and dcom 11.9 group decision support systems 11.10 basics of website design 2083 q10b: erp with e-commerce for inventory and orders">
+  <div class="uhead"><span class="unum">11</span>
+    <div class="utitle"><h3>MIS and Web Engineering</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit11_MIS_and_Web_Engineering.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 11</span><span class="fname">Unit11_MIS_and_Web_Engineering.pdf</span></a>
+    <div class="fmeta"><span>Items 11.1–11.10 in syllabus order</span><span>52 pages · 1.6 MB · 18 model answers · 55 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (10) and past Paper II questions</summary><ul class="subs"><li>11.1 Information systems, client-server computing</li><li>11.2 Information systems and decision making</li><li>11.3 Database design issues, data mining, data warehousing</li><li>11.4 Knowledge management, strategic use of IT</li><li>11.5 Reengineering with IT, ERP, IS security, information privacy, global IT issues</li><li>11.6 Software demonstrations including advanced spreadsheets, CBSE</li><li>11.7 Multimedia</li><li>11.8 OOP with COM and DCOM</li><li>11.9 Group decision support systems</li><li>11.10 Basics of website design</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2083 Q10b: ERP with e-commerce for inventory and orders</li></ul></div></details>
+</li>
+<li class="unit" data-s="it in nepal 12.1 history of it in nepal 12.2 it policy of nepal 12.3 electronic transaction act 12.4 copyright act 12.5 uses of computers and software development 12.6 nepali unicode, nepali fonts 12.7 licensing issues 2079 q10: eta: licensing of certifying authorities">
+  <div class="uhead"><span class="unum">12</span>
+    <div class="utitle"><h3>IT in Nepal</h3>
+      <div class="weight"><span class="wbar"><i style="width:70%"></i></span>10% · about 5 of 50 MCQs</div></div></div>
+  <div class="files"><div class="file"><a class="open" href="2.%20Computer%20Notes/Unit12_IT_in_Nepal.pdf" target="_blank" rel="noopener">
+    <span class="kind">Chapter 12</span><span class="fname">Unit12_IT_in_Nepal.pdf</span></a>
+    <div class="fmeta"><span>Items 12.1–12.7 in syllabus order</span><span>32 pages · 1.0 MB · 13 model answers · 47 MCQs</span></div></div></div>
+  <details><summary>Syllabus topics (7) and past Paper II questions</summary><ul class="subs"><li>12.1 History of IT in Nepal</li><li>12.2 IT policy of Nepal</li><li>12.3 Electronic Transaction Act</li><li>12.4 Copyright Act</li><li>12.5 Uses of computers and software development</li><li>12.6 Nepali Unicode, Nepali fonts</li><li>12.7 Licensing issues</li></ul>
+    <div class="asked"><b>Asked in Computer Officer Paper II:</b><ul><li>2079 Q10: ETA: licensing of Certifying Authorities</li></ul></div></details>
+</li></ol></section>
+
+<section class="card" id="papers"><h2>Real Computer Officer Paper II questions</h2><p class="lead">Both recent papers, question by question, with the chapter that answers each one. Every one of these has a full model answer.</p>
+<div class="scroll"><table><thead><tr><th>Paper</th><th>Question</th><th>Chapter</th></tr></thead><tbody>
+<tr><td>2083/01/10</td><td>Q1: CPU and its components; Internet, intranet and extranet</td><td>1</td></tr>
+<tr><td>2083/01/10</td><td>Q2: tree data structure; preorder, inorder and postorder traversal</td><td>2</td></tr>
+<tr><td>2083/01/10</td><td>Q3: language translators; Java access modifiers</td><td>6</td></tr>
+<tr><td>2083/01/10</td><td>Q4: roles of JAD group members; SDLC and why analysis and design matter</td><td>3</td></tr>
+<tr><td>2083/01/10</td><td>Q5: use case diagram for an online shopping system</td><td>3</td></tr>
+<tr><td>2083/01/10</td><td>Q6: virtual memory, paging and segmentation, process management</td><td>4</td></tr>
+<tr><td>2083/01/10</td><td>Q7: concurrency in DBMS and concurrency control</td><td>5</td></tr>
+<tr><td>2083/01/10</td><td>Q8: DNS name resolution; DHCP</td><td>7</td></tr>
+<tr><td>2083/01/10</td><td>Q9: phases of a compiler</td><td>9</td></tr>
+<tr><td>2083/01/10</td><td>Q10: e-governance and success factors; ERP with e-commerce</td><td>10, 11</td></tr>
+<tr><td>2079/11/16</td><td>Q1: computer architecture; AUTOEXEC.BAT and CONFIG.SYS; Internet vs extranet</td><td>1</td></tr>
+<tr><td>2079/11/16</td><td>Q2: BFS vs DFS</td><td>2</td></tr>
+<tr><td>2079/11/16</td><td>Q3: building blocks of OOP; C++ vs Java</td><td>6</td></tr>
+<tr><td>2079/11/16</td><td>Q4: user involvement; analysis and design techniques</td><td>3</td></tr>
+<tr><td>2079/11/16</td><td>Q5: JAD and its purpose; roles of JAD group members</td><td>3</td></tr>
+<tr><td>2079/11/16</td><td>Q6: page replacement algorithms</td><td>4</td></tr>
+<tr><td>2079/11/16</td><td>Q7: normalization to 3NF; relational algebra and SQL</td><td>5</td></tr>
+<tr><td>2079/11/16</td><td>Q8: code optimization and loop optimization; e-governance model in Nepal</td><td>6, 9, 10</td></tr>
+<tr><td>2079/11/16</td><td>Q9: DHCP and DNS name resolution</td><td>7</td></tr>
+<tr><td>2079/11/16</td><td>Q10: ETA: licensing of Certifying Authorities</td><td>12</td></tr>
+</tbody></table></div></section>
+
+<section class="card"><h2>Suggested study order</h2><ul class="tips">
+<li>Start with the heaviest units: DBMS (14%) → Computer Fundamentals (10%) → System Analysis and Design (10%) → Operating Systems (10%) → Networking (10%) → MIS and Web Engineering (10%) → IT in Nepal (10%).</li>
+<li>In each chapter read the syllabus map and past questions first, then the content, then write the model answers from memory.</li>
+<li>Do each chapter's MCQ bank without looking, then check the answer key at the end of the PDF; use the quick-revision sheet the night before.</li>
+<li>Practical exam: OS 1, DBMS 2, programming 1 and networking 1. Work through the practical sections of Chapters 4, 5, 6 and 7 by hand.</li></ul></section>
+
+<section class="card" id="syllabus"><h2>Syllabus</h2><ul>
+<li><a href="computer_officer_syllabus.pdf" target="_blank" rel="noopener">Official syllabus (scanned PDF)</a></li>
+<li><a href="IT_SYLLABUS.md" target="_blank" rel="noopener">IT syllabus in plain text (Paper I Part II, Units 1–12)</a></li></ul></section>
+<footer>Last updated 2026-11-27 18:19</footer>
+</div>
+<script>
+const q=document.getElementById('q'), units=[...document.querySelectorAll('.unit')];
+q.addEventListener('input',()=>{const t=q.value.trim().toLowerCase();
+  units.forEach(u=>{const hit=!t||u.dataset.s.includes(t); u.classList.toggle('hide',!hit); if(t&&hit) u.querySelector('details').open=true;});});
+let open=false; document.getElementById('exp').addEventListener('click',e=>{open=!open;
+  units.forEach(u=>u.querySelector('details').open=open); e.target.textContent=open?'Hide all topics':'Show all topics';});
+const root=document.documentElement;
+try{const s=localStorage.getItem('coHubTheme'); if(s) root.dataset.theme=s;}catch(e){}
+document.getElementById('theme').addEventListener('click',()=>{const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme=dark?'light':'dark'; try{localStorage.setItem('coHubTheme',root.dataset.theme);}catch(e){}});
+</script></body></html>
